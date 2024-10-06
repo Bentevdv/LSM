@@ -21,6 +21,8 @@ print("Welkom bij de beheerapplicatie van LSM!")
 print("----------- MENU -----------")
 print("a) Overzicht voorzieningen")
 print("b) Toevoegen van voorzieningen")
+print("c) Aanpassen van voorzieningen")
+print("d) Verwijderen van voorzieningen")
 
 keuze = input("Selecteer optie: ")
 
@@ -59,10 +61,28 @@ elif keuze == "b":
     result = db.execute_query(f"""
         INSERT INTO voorziening (naam, type, overdekt, geschatte_wachttijd, doorlooptijd, actief) 
         VALUES ('{naam_voorziening}', '{type_voorziening}', {overdekt_voorziening}, {geschatte_wachttijd}, {doorlooptijd}, {actief})
-    """
+    """)
     db.close()
 
     if result:
         print(f"Voorziening toegevoegd: {naam_voorziening}, {type_voorziening}")
      #je kan nu dingen toevoegen aan de database, nu nog bewerken en verwijderen
-     
+     #vergeet je database niet te refreshen:)
+
+elif keuze == "d":
+    print("----------- DELETE -----------")
+    type_voorziening = input("\nSelecteer type voorziening: ")  
+    naam_voorziening= input("Selecteer naam voorziening: ")  
+
+    db.connect()
+    result = db.execute_query(f"""
+        DELETE FROM voorziening
+        WHERE naam = '{naam_voorziening}' AND type = '{type_voorziening}'
+    """)
+    db.close()
+
+    if result:
+        print(f"Voorziening verwijderd: {naam_voorziening}, {type_voorziening}")
+#Je kan nu dingen verwijderen
+
+
