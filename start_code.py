@@ -24,6 +24,7 @@ print("b) Toevoegen van voorzieningen")
 print("c) Aanpassen van voorzieningen")
 print("d) Verwijderen van voorzieningen")
 
+
 keuze = input("Selecteer optie: ")
 
 if keuze == "a":    
@@ -83,6 +84,35 @@ elif keuze == "d":
 
     if result:
         print(f"Voorziening verwijderd: {naam_voorziening}, {type_voorziening}")
-#Je kan nu dingen verwijderen
+#Je kan nu dingen verwijderen'
+#Ik kom er nu net achter dat ik c heb overgeslagen, oepsie
+elif keuze == "c":
+    print("----------- EDIT -----------")
+    type_voorziening = input("\nSelecteer type voorziening: ")  
+    naam_voorziening= input("Selecteer naam voorziening: ")
+
+    column = input("Selecteer kolom: ")
+    new_value = input("Geef nieuwe waarde: ")
+
+    db.connect()
+    result = db.execute_query(f"""
+        UPDATE voorziening 
+        SET {column} = {new_value} 
+        WHERE naam = '{naam_voorziening}' AND type = '{type_voorziening}'
+    """)
+    db.close()
+
+    print(result)
+
+    if result:
+        print(f"Voorziening aangepast: {naam_voorziening}, {type_voorziening}")
+
+#Waarom komt hier een false uit??
+#Er komt ook geen error uit en Jordy (mijn Teaching assistant komt dr ook niet uit)
+#Dus ik laat het voor gezien voor nu, vooral omdat het half 2 is :)
+
+
+
+
 
 
