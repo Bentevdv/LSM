@@ -24,15 +24,28 @@ print("b) Toevoegen van voorzieningen")
 
 keuze = input("Selecteer optie: ")
 
-if keuze == "a":
-    print("Het overzicht:")
-    
+if keuze == "a":    
     list_met_voorzieningen = overzicht_attracties()
-    print(list_met_voorzieningen)
 
-    print("Eerste rij:")
-    print(list_met_voorzieningen[0]["naam"])
-    print(list_met_voorzieningen[0]["type"])
+    c = 0
+    print("Het overzicht:")
+    for voorziening in list_met_voorzieningen:
+        print("Rij " + str(c) + ":")
+        print("  - " + voorziening["naam"])
+        print("  - " + voorziening["type"])
+        c += 1
     
     # programmeer verder...
-
+    #shoutout naar mijn persoonlijke teaching assistent Jordy
+    # Hij heeft de code ook aangepast ivm leesbaarheidsproblemen.     
+elif keuze == "b":
+    print("----------- TYPES -----------")
+    print("horeca")
+    print("attractie")
+    print("winkel")
+    voorziening_type = input("\nSelecteer type voorziening: ")
+    if voorziening_type != "horeca" and voorziening_type != "attractie" and voorziening_type != "winkel":
+        print("Dit is geen geldig type voor een voorziening")
+        exit()
+    print("Voorziening maken van type; " + voorziening_type)
+    
