@@ -43,9 +43,26 @@ elif keuze == "b":
     print("horeca")
     print("attractie")
     print("winkel")
-    voorziening_type = input("\nSelecteer type voorziening: ")
-    if voorziening_type != "horeca" and voorziening_type != "attractie" and voorziening_type != "winkel":
+    type_voorziening = input("\nSelecteer type voorziening: ")
+    if type_voorziening != "horeca" and type_voorziening != "attractie" and type_voorziening != "winkel":
         print("Dit is geen geldig type voor een voorziening")
         exit()
-    print("Voorziening maken van type; " + voorziening_type)
+    # print("Voorziening maken van type; " + voorziening_type)
     
+    naam_voorziening = input("Benoem voorziening: ")
+    overdekt_voorziening =bool(input("Is overdekt: "))
+    geschatte_wachttijd = int(input("Geschatte wachttijd: "))
+    doorlooptijd = int(input("Voeg geschatte doorlooptijd toe: "))
+    actief = bool(input("Is actief: "))
+    
+    db.connect()
+    result = db.execute_query(f"""
+        INSERT INTO voorziening (naam, type, overdekt, geschatte_wachttijd, doorlooptijd, actief) 
+        VALUES ('{naam_voorziening}', '{type_voorziening}', {overdekt_voorziening}, {geschatte_wachttijd}, {doorlooptijd}, {actief})
+    """
+    db.close()
+
+    if result:
+        print(f"Voorziening toegevoegd: {naam_voorziening}, {type_voorziening}")
+     #je kan nu dingen toevoegen aan de database, nu nog bewerken en verwijderen
+     
